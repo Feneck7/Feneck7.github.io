@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+
+    <title>Rock, Paper, Scissors</title>
+
+    <style>
+    </style>
+</head>
+<body>
+
+<h1>Stein, Saks, Papir</h1>
+
+<div class="game">
+
+    <script>
+        // User choice
+        var userChoice = prompt("Velger du stein, saks eller papir?");
+        if (! userChoice) {
+            // User choice was undefined
+            document.write("<p>Prøv igjen.</p>");
+        } else {
+            // Display user choice
+            document.write("<p>Player 1:" + " " + userChoice + "</p>");
+        }
+        // Computer choice
+        var computerChoice = Math.random();
+        if (computerChoice < 0.34) {
+            computerChoice = "stein";
+        } else if(computerChoice <= 0.67) {
+            computerChoice = "papir";
+        } else {
+            computerChoice = "saks";
+        }
+        // Display computer choice
+        document.write("<p>Computer:" + " " + computerChoice + "</p>");
+        // Compare user choice vs computer choice
+        var compare = function(choice1,choice2) {
+            if (choice1 === choice2) {
+                return "Uavgjort!";
+            }
+            if (choice1 === "stein") {
+                if (choice2 === "saks") {
+                    // rock wins
+                    return "Du vant!";
+                } else {
+                    // paper wins
+                    return "Du tapte! Prøv igjen.";
+                }
+            }
+            if (choice1 === "papir") {
+                if (choice2 === "stein") {
+                    // paper wins
+                    return "Du vant!";
+                } else {
+                    // scissors wins
+                    return "Du tapte! Prøv igjen.";
+                }
+            }
+            if (choice1 === "saks") {
+                if (choice2 === "stein") {
+                    // rock wins
+                    return "Du tapte! Prøv igjen.";
+                } else {
+                    // scissors wins
+                    return "Du vant!";
+                }
+            }
+        };
+        // Run the compare function
+        var results = compare(userChoice,computerChoice);
+        // Display results
+        document.write("<br><hr><br>" + results);
+    </script>
+
+</div>
+
+</body>
+</html>
