@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #firkant {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            animation: Animasjon1 1s;
+            animation-duration: 2s;
+            transform-origin: right bottom;
+            animation-play-state: paused;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes Animasjon1 {
+            from{transform:rotate(0deg);}
+            to{transform:rotate(90deg);}
+
+        }
+        #firkant:hover{
+            animation-play-state: running;
+        }
+
+        #firkant2 {
+            width: 100px;
+            height: 100px;
+            background-color: lime;
+            animation: Animasjon2 1s;
+            animation-duration: 2s;
+            animation-play-state: paused;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes Animasjon2 {
+            from{transform: rotate(0deg);}
+            to{transform: rotate(60deg);}
+
+        }
+
+        #firkant2:hover{
+            animation-play-state: running;
+        }
+
+        #firkant3 {
+            width: 100px;
+            height: 100px;
+            background-color: mediumpurple;
+            animation: Animasjon3 1s;
+            animation-duration: 2s;
+            animation-play-state: paused;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes Animasjon3 {
+            from{
+                width: 100px;
+                height: 100px;
+            }
+            to{
+                width: 200px;
+                height: 200px;
+            }
+
+        }
+
+        #firkant3:hover{
+            animation-play-state: running;
+        }
+
+        #firkant4 {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            animation: Animasjon4 1s;
+            animation-duration: 10s;
+            animation-play-state: paused;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes Animasjon4 {
+            from{transform: translateX(0px);}
+            to{transform: translateX(1175px);}
+        }
+
+        #firkant4:hover {
+            animation-play-state: running;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div id="firkant"></div>
+<div id="firkant2"></div>
+<div id="firkant3"></div>
+<div id="firkant4"></div>
+
+
+
+</body>
+</html>

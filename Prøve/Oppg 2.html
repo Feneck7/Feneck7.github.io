@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valutakalkulator</title>
+</head>
+<body>
+
+<input id="inpTall" type="number" placeholder="Skriv inn beløpet">
+<span id="spnResultat"></span>
+<br>
+<button id="btn1">Konverter til SEK</button>
+<button id="btn2">Konverter til GBP</button>
+<button id="btn3">Konverter til USD</button>
+
+<script>
+    var inpTall = document.getElementById(inpTall);
+    var spnResultat = document.getElementById(spnResultat);
+    var btn1 = document.getElementById(btn1);
+    var btn2 = document.getElementById(btn2);
+    var btn3 = document.getElementById(btn3);
+
+    btn1.onclick = function(){
+        spnResultat = 1.07 * Number(inpTall.value);
+    };
+
+    btn2.onclick = function(){
+        spnResultat = 0.089 * Number(inpTall.value);
+    };
+
+    btn3.onclick = function(){
+        spnResultat = 0.11 * Number(inpTall.value);
+    };
+</script>
+</body>
+</html>

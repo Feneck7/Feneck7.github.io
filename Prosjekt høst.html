@@ -12,11 +12,21 @@
 <body>
 
 <h1>Stein, Saks, Papir</h1>
+<img id="vinn" src="">
+<img id="tap" src="">
+<embed src="Lyder/Bakgrunnsmusikk.mp3">
+
 
 <div class="game">
 
+
     <script>
         // User choice
+        var vinn = document.getElementById("vinn");
+        var tap = document.getElementById("tap");
+
+
+
         var userChoice = prompt("Velger du stein, saks eller papir?");
         if (! userChoice) {
             // User choice was undefined
@@ -44,27 +54,36 @@
             if (choice1 === "stein") {
                 if (choice2 === "saks") {
                     // rock wins
+                    vinn.src = "bilder/hepy shobe.jpg";
+
                     return "Du vant!";
                 } else {
                     // paper wins
+                    tap.src = "bilder/Angery shober.png";
+
                     return "Du tapte! Prøv igjen.";
+
                 }
             }
             if (choice1 === "papir") {
                 if (choice2 === "stein") {
                     // paper wins
+                    vinn.src = "bilder/hepy shobe.jpg";
                     return "Du vant!";
                 } else {
                     // scissors wins
+                    tap.src = "bilder/Angery shober.png";
                     return "Du tapte! Prøv igjen.";
                 }
             }
             if (choice1 === "saks") {
                 if (choice2 === "stein") {
                     // rock wins
+                    tap.src = "bilder/Angery shober.png";
                     return "Du tapte! Prøv igjen.";
                 } else {
                     // scissors wins
+                    vinn.src = "bilder/hepy shobe.jpg";
                     return "Du vant!";
                 }
             }
