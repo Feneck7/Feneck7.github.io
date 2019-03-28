@@ -39,32 +39,31 @@
         {x: 130, y: 150},
         {x: 120, y: 150},
         {x: 110, y: 150}
-    ]
-    // The user's score
+    ];
+    // Spillerens poengsum
     let score = 0;
-    // When set to true the snake is changing direction
+    // Når koden blir til 'true' så endrer slangen direksjon
     let changingDirection = false;
-    // Food x-coordinate
+    // Maten sin x-kordinat
     let foodX;
-    // Food y-coordinate
+    // Maten sin y-kordinat
     let foodY;
-    // Horizontal velocity
+    // Horisontal fart
     let dx = 10;
-    // Vertical velocity
+    // Vertikal fart
     let dy = 0;
-    // Get the canvas element
+    // Få 'canvas'-elementet
     const gameCanvas = document.getElementById("gameCanvas");
-    // Return a two dimensional drawing context
+    // Få en 2D tegning
     const ctx = gameCanvas.getContext("2d");
-    // Start game
+    // Start spill
     main();
-    // Create the first food location
+    // Lager første området for maten
     createFood();
-    // Call changeDirection whenever a key is pressed
+    // Kaller på changeDirection når en knapp blir trykket på
     document.addEventListener("keydown", changeDirection);
     /**
-     * Main function of the game
-     * called repeatedly to advance the game
+     * Hovedfunksjonen i spillet
      */
     function main() {
         // If the game ended return early to stop game
@@ -80,21 +79,21 @@
         }, GAME_SPEED)
     }
     /**
-     * Change the background colour of the canvas to CANVAS_BACKGROUND_COLOUR and
-     * draw a border around it
+     * Endrer 'canvas' sin bakgrunnsfarge til CANVAS_BACKGROUND_COLOUR og
+     * tegner en grense rundt det
      */
     function clearCanvas() {
-        //  Select the colour to fill the drawing
+        //  Velger farge for å fylle inn tegningen
         ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
-        //  Select the colour for the border of the canvas
+        //  Velger fargen for grensene
         ctx.strokestyle = CANVAS_BORDER_COLOUR;
-        // Draw a "filled" rectangle to cover the entire canvas
+        // Tegner en "filled" rektangle for å fylle hele canvaset
         ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
-        // Draw a "border" around the entire canvas
+        // Tegner en "border" rundt hele canvaset
         ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
     }
     /**
-     * Draw the food on the canvas
+     * Lager mat rundt canvaset
      */
     function drawFood() {
         ctx.fillStyle = FOOD_COLOUR;
@@ -103,31 +102,31 @@
         ctx.strokeRect(foodX, foodY, 10, 10);
     }
     /**
-     * Advances the snake by changing the x-coordinates of its parts
-     * according to the horizontal velocity and the y-coordinates of its parts
-     * according to the vertical veolocity
+     * Flytter slangen ved å endre x-kordinatene til slangens deler
+     * i henhold til den horisontale farten og y-kordinatene til slangens delere
+     * i henhold til den vertikale farten
      */
     function advanceSnake() {
-        // Create the new Snake's head
+        // Lager hodet til den nye slangen
         const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-        // Add the new head to the beginning of snake body
+        // Legger det nye hodet til starten av slangens kropp
         snake.unshift(head);
         const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
         if (didEatFood) {
-            // Increase score
+            // Øker poengsummen
             score += 10;
-            // Display score on screen
+            // Viser poengsum på skjermen
             document.getElementById('score').innerHTML = score;
-            // Generate new food location
+            // Genererer ny plass for mat
             createFood();
         } else {
-            // Remove the last part of snake body
+            // Fjerner siste del av slangens kropp
             snake.pop();
         }
     }
     /**
-     * Returns true if the head of the snake touched another part of the game
-     * or any of the walls
+     * Blir 'true' om hodet til slangen rører en annen del av spillet
+     * eller noen av veggene
      */
     function didGameEnd() {
         for (let i = 4; i < snake.length; i++) {
@@ -140,57 +139,56 @@
         return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall
     }
     /**
-     * Generates a random number that is a multiple of 10 given a minumum
-     * and a maximum number
-     * @param { number } min - The minimum number the random number can be
-     * @param { number } max - The maximum number the random number can be
+     * Genererer et tilfeldig tall ganget med 10
+     * @param { number } min - Det minste tallet det kan bli
+     * @param { number } max - Det største tallet det kan bli
      */
     function randomTen(min, max) {
         return Math.round((Math.random() * (max-min) + min) / 10) * 10;
     }
     /**
-     * Creates random set of coordinates for the snake food.
+     * Lager et tilfeldig sett med koordinater for slangemat
      */
     function createFood() {
-        // Generate a random number the food x-coordinate
+        // Genererer et tilfeldig nummer for matens x-kordinat
         foodX = randomTen(0, gameCanvas.width - 10);
-        // Generate a random number for the food y-coordinate
+        // Genererer et tilfeldig nummer for matens y-kordinat
         foodY = randomTen(0, gameCanvas.height - 10);
-        // if the new food location is where the snake currently is, generate a new food location
+        // Hvis den nye maten dukker opp hvor slangen er, generer et nytt sted
         snake.forEach(function isFoodOnSnake(part) {
             const foodIsoNsnake = part.x == foodX && part.y == foodY;
             if (foodIsoNsnake) createFood();
         });
     }
     /**
-     * Draws the snake on the canvas
+     * Lager slangen i canvaset
      */
     function drawSnake() {
-        // loop through the snake parts drawing each part on the canvas
+        // looper gjennom slangedelene og tegner hver del i canvaset
         snake.forEach(drawSnakePart)
     }
     /**
-     * Draws a part of the snake on the canvas
-     * @param { object } snakePart - The coordinates where the part should be drawn
+     * Lager en del av slangen i canvaset
+     * @param { object } snakePart - Koordinatene hvor delen skal bli tegnet
      */
     function drawSnakePart(snakePart) {
-        // Set the colour of the snake part
+        // Setter fargen til slangedelen
         ctx.fillStyle = SNAKE_COLOUR;
-        // Set the border colour of the snake part
+        // Setter farge på 'borderen' til slangedelene
         ctx.strokestyle = SNAKE_BORDER_COLOUR;
-        // Draw a "filled" rectangle to represent the snake part at the coordinates
-        // the part is located
+        // Lager en "fylt" rektangel for å representere slangedelen på koordinatene
+        // delen er på
         ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
-        // Draw a border around the snake part
+        // Lager en 'border' rundt slangedelen
         ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
     }
     /**
-     * Changes the vertical and horizontal velocity of the snake according to the
-     * key that was pressed.
-     * The direction cannot be switched to the opposite direction, to prevent the snake
-     * from reversing
-     * For example if the the direction is 'right' it cannot become 'left'
-     * @param { object } event - The keydown event
+     * Endrer vertikal og horisontal farten til slangen i henhold til
+     * knappen som ble trykket.
+     * Retningen kan ikke bli endret til den motsatte retningen, for å hindre slangen
+     * i å reversere
+     * For eksempel, om retningen er 'right' så kan den ikke bli 'left'
+     * @param { object } event - 'keydown' handlingen
      */
     function changeDirection(event) {
         const LEFT_KEY = 37;
@@ -198,10 +196,10 @@
         const UP_KEY = 38;
         const DOWN_KEY = 40;
         /**
-         * Prevent the snake from reversing
-         * Example scenario:
-         * Snake is moving to the right. User presses down and immediately left
-         * and the snake immediately changes direction without taking a step down first
+         * Hindrer slangen fra å reversere
+         * Eksempel:
+         * Slangen beveger seg mot høyre. Spiller trykker ned og venstre og venstre umiddelbart
+         * og slangen bytter retning med en gang uten å gå ned først
          */
         if (changingDirection) return;
         changingDirection = true;
